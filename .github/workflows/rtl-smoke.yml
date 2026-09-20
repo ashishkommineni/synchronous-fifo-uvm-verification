@@ -1,0 +1,20 @@
+name: RTL smoke
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  verilator-smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install Verilator
+        run: pip install verilator==5.48.0
+      - name: Lint RTL
+        run: make lint VERILATOR=verilator-cli
+      - name: Run smoke test
+        run: make smoke VERILATOR=verilator-cli
