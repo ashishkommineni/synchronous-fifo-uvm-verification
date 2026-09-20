@@ -1,0 +1,8 @@
+build/
+xcelium.d/
+INCA_libs/
+waves.shm/
+*.log
+*.key
+*.history
+results/xcelium_cov/
