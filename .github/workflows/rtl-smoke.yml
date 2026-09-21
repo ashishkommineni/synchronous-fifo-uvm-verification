@@ -1,4 +1,4 @@
-name: RTL smoke
+name: RTL and SVA smoke
 
 on:
   push:
