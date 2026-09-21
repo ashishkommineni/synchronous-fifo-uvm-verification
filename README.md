@@ -63,7 +63,7 @@ Install Verilator 5.x and run:
 make smoke
 ```
 
-Success is explicit:
+The smoke binary runs the FIFO SVA as well as data checks. Success is explicit:
 
 ```text
 SYNC_FIFO_SMOKE_PASS checks=11
