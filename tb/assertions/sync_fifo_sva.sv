@@ -24,7 +24,7 @@ module sync_fifo_sva #(
   else $error("FIFO cannot be full and empty simultaneously");
 
   ap_level_in_range :
-  assert property (level <= DEPTH)
+  assert property (level <= LEVEL_WIDTH'(DEPTH))
   else $error("FIFO level exceeded DEPTH");
 
   ap_empty_level :
@@ -32,12 +32,18 @@ module sync_fifo_sva #(
   else $error("empty asserted with non-zero level");
 
   ap_full_level :
-  assert property (full |-> level == DEPTH)
+  assert property (full |-> level == LEVEL_WIDTH'(DEPTH))
   else $error("full asserted before the FIFO reached DEPTH");
 
   ap_underflow_blocked :
   assert property ((empty && rd_en) |=> !rd_valid)
   else $error("Read completed while FIFO was empty");
+
+  ap_accepted_write_data_known :
+  assert property ((wr_en && (!full || rd_en)) |-> !$isunknown(wr_data));
+
+  ap_valid_read_data_known :
+  assert property (rd_valid |-> !$isunknown(rd_data));
 
   cp_full_simultaneous_read_write :
   cover property (full && wr_en && rd_en);
