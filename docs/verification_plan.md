@@ -18,3 +18,7 @@
 - All assertions pass.
 - All operation bins, empty/full level bins, and simultaneous-operation crosses are hit.
 - Verilator smoke test prints `SYNC_FIFO_SMOKE_PASS`.
+
+## Constrained-random intent
+
+The transaction weights write-only, read-only, simultaneous, and idle cycles instead of leaving acceptance to an accidental uniform distribution. This drives steady-state traffic as well as boundary requests. The directed portion fills, overflows, drains, underflows, exercises simultaneous operations, and wraps pointers before the randomized phase begins. Scoreboard end-of-test checks reject an empty-traffic or partially drained run.
