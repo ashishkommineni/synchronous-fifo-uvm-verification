@@ -26,6 +26,21 @@ module tb_sync_fifo_smoke;
   ) dut (
       .*
   );
+  sync_fifo_sva #(
+      .DATA_WIDTH(DATA_WIDTH),
+      .DEPTH(DEPTH)
+  ) sva (
+      .clk,
+      .rst_n,
+      .wr_en,
+      .wr_data,
+      .rd_en,
+      .rd_data,
+      .rd_valid,
+      .full,
+      .empty,
+      .level
+  );
 
   task automatic push(input logic [DATA_WIDTH-1:0] data);
     @(negedge clk);
